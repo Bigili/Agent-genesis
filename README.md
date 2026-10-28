@@ -1,46 +1,16 @@
-# AGENT GENESIS — Dynamic NFT Artwork Generator (No IPFS)
+# AGENT GENESIS — Vercel dynamic NFT generator
 
-This starter generates artwork and JSON metadata deterministically from a token ID.
-It does **not** require 10,000 separate image files or 10,000 separate JSON files.
+This version adapts the dynamic SVG image and JSON metadata endpoints to Vercel Node.js Functions.
 
-## What this package does
-- `/api/metadata/1` returns JSON metadata for token 1.
-- `/api/image/1` returns the SVG artwork for token 1.
-- Each token ID always produces the same art and traits.
-- Uses Cloudflare Pages Functions; no IPFS is involved.
+## Routes
+- `/` — preview page
+- `/api/image/1` — SVG image for token 1 (valid IDs 1–10000)
+- `/api/metadata/1` — JSON metadata for token 1
 
-## Important before mainnet
-This is a **starter/prototype**, not a deployed NFT project or audited contract.
-You still need to deploy the website, configure the contract's `tokenURI` / base URI,
-test with your target marketplace and Binance Agentic Wallet, and test on BNB Chain testnet.
-A website/API host can change or go offline; without IPFS, the artwork is not decentralized
-or guaranteed permanent.
+## Deploy on Vercel
+1. Upload the `api/` folder, `src/`, `public/`, and `package.json` to the root of the existing GitHub repository.
+2. The Vercel project settings should use Framework Preset `Other`, Root Directory `./`, Build Command blank, Output Directory `public`, Install Command blank.
+3. Redeploy after the GitHub commit.
+4. Test `/api/image/1` and `/api/metadata/1` on the deployed domain.
 
-## Deploy to Cloudflare Pages
-1. Create a Git repository and upload the contents of this folder.
-2. In Cloudflare, create a Pages project connected to that repository.
-3. In build settings, leave the build command blank and set the build output directory to `public`.
-   Keep the `functions` and `src` folders at the repository root; do not move them into `public`.
-4. Deploy.
-5. Test:
-   - `https://YOUR-SITE.pages.dev/api/metadata/1`
-   - `https://YOUR-SITE.pages.dev/api/image/1`
-6. The metadata response should contain an `image` URL that opens the SVG.
-7. Set your contract's metadata base URI to:
-   `https://YOUR-SITE.pages.dev/api/metadata/`
-   This assumes the contract appends the token ID without `.json`.
-   If your chosen ERC-721 contract appends `.json`, change the routes or base URI to match.
-
-## Design and rarity
-The generator assigns traits deterministically from the token ID. It includes 10,000 possible IDs.
-The rarity bands are assigned by token ID range: 1 Genesis, 2–100 Legendary, 101–500 Epic,
-501–1500 Rare, 1501–4000 Uncommon, and 4001–10000 Common. This guarantees those counts
-but makes rarity correlate with token ID order. If desired, randomize the mint-to-token assignment
-or use a secure reveal design before launch.
-
-## Security and marketplace notes
-- Never assume Binance endorses or has integrated this project.
-- Confirm whether your chosen marketplace displays SVG metadata and external HTTPS URLs.
-- Do not advertise "permanent" artwork while it is hosted on a conventional website.
-- The mint contract must enforce supply, free first mint, payment, and five lifetime mints per wallet.
-- The API is not the source of truth for ownership or mint limits; those belong in the contract.
+Important: this is only the dynamic art/metadata generator. It does not include a smart contract, minting site, wallet connection, or payment logic. Images and metadata are served from the website and are not decentralized/permanent storage. Verify all routes and metadata before deploying a contract that points to them.

@@ -1,0 +1,16 @@
+VERCEL MIGRATION
+
+Add these new paths at the repository root:
+- api/image/[id].js
+- api/metadata/[id].js
+
+Keep these existing paths:
+- src/generator.js
+- public/index.html
+- package.json (replace with the included one if desired)
+
+The old Cloudflare Pages routes live under functions/api/ and are not used by Vercel. After confirming the Vercel endpoints work, you can delete the old functions/ folder to avoid confusion.
+
+Then commit the changes to GitHub. Vercel should redeploy automatically. Test:
+https://YOUR-VERCEL-DOMAIN/api/image/1
+https://YOUR-VERCEL-DOMAIN/api/metadata/1
