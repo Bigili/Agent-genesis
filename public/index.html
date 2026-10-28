@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGENT GENESIS — Preview</title>
+<style>
+body{margin:0;background:#090b13;color:#f4f5fb;font:16px system-ui,sans-serif;display:grid;min-height:100vh;place-items:center}
+main{width:min(900px,92vw);display:grid;grid-template-columns:minmax(220px,1fr) minmax(240px,1fr);gap:28px;align-items:center}
+img{width:100%;border:1px solid #31364a;border-radius:20px;background:#111}
+input,button{font:inherit;padding:12px;border-radius:10px;border:1px solid #40465b;background:#141827;color:white}
+button{cursor:pointer} .controls{display:flex;gap:8px;margin:12px 0} .controls input{width:120px}
+code{overflow-wrap:anywhere;color:#b6e8ff}
+@media(max-width:650px){main{grid-template-columns:1fr}}
+</style></head>
+<body><main>
+<section><img id="art" src="/api/image/1" alt="Agent Genesis artwork"></section>
+<section><h1>AGENT GENESIS</h1><p>10,000 deterministic, procedurally generated intelligence units. No IPFS and no individual image files required.</p>
+<div class="controls"><input id="id" type="number" min="1" max="10000" value="1"><button id="show">Preview NFT</button></div>
+<p id="title">Agent Genesis #00001</p><p>Metadata endpoint:</p><code id="meta">/api/metadata/1</code>
+<p><small>Preview only. This is not a live minting site and no wallet is connected.</small></p></section>
+</main><script>
+const input=document.getElementById('id');
+function show(){let n=Math.max(1,Math.min(10000,Number(input.value)||1));input.value=n;document.getElementById('art').src='/api/image/'+n;document.getElementById('title').textContent='Agent Genesis #'+String(n).padStart(5,'0');document.getElementById('meta').textContent='/api/metadata/'+n;}
+document.getElementById('show').addEventListener('click',show);input.addEventListener('keydown',e=>{if(e.key==='Enter')show()});
+</script></body></html>

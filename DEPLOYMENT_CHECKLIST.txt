@@ -1,0 +1,14 @@
+AGENT GENESIS — DEPLOYMENT CHECKLIST
+1. Upload all project files to a Git repository.
+2. Create a Cloudflare Pages project connected to the repository.
+3. Leave the build command blank; set build output directory to: public.
+4. Keep the functions/ and src/ folders at the repository root.
+5. Test /api/metadata/1 and /api/image/1.
+6. Test several IDs, including 1, 100, 101, 501, 1501, 4001, and 10000.
+7. Verify the contract tokenURI exactly matches the metadata route format.
+8. Test marketplace rendering and Binance Agentic Wallet compatibility before launch.
+9. Deploy contract on BNB Chain testnet first.
+10. Verify supply cap, first-free mint, paid mint price, reentrancy protection, and 5 lifetime mints per wallet.
+11. Have the contract reviewed before mainnet deployment.
+
+No IPFS is used. Hosted metadata and artwork depend on the website remaining available.
